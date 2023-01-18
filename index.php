@@ -1,6 +1,6 @@
 <?php
 //Database Conection
 require_once './database/bootstrap.php';
-$templateParams["Type"] = "Index";
+$templateParams["Type"] = "indexTemplate.php";
 require './Template/base.php';
 ?>
