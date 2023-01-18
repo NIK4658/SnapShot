@@ -11,6 +11,11 @@ $Posts[0] = array(
     'n_comments' => 20,
     'device' => 'iPhone 12 Pro Max',
     'location' => 'Rome, Italy',
+    'nposts' => '15',
+    'followers' => '150',
+    'following' => '145',
+    'bio' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl sit amet.',
+    'images' => array('https://res.klook.com/image/upload/Mobile/City/afmqgg5h0jl9wnr1dfmf.jpg','https://res.klook.com/image/upload/Mobile/City/afmqgg5h0jl9wnr1dfmf.jpg')
 );
 
 $Posts[1] = array(
