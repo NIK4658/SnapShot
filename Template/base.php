@@ -31,7 +31,7 @@
         <div class="buttons">
             <button class="mainbutton" onclick="location.href='/SnapShot/Home'">Home</a></button>
             <button class="mainbutton" onclick="location.href='#'">Search</button>
-            <button class="mainbutton" onclick="location.href='#'">Upload</button>
+            <button class="mainbutton" onclick="location.href='/SnapShot/UploadImage'">Upload</button>
             <button class="mainbutton" onclick="location.href='#'">Notifications</button>
             <button class="mainbutton" onclick="location.href='/SnapShot/Profile'">Profile</button>
             <button class="mainbutton" onclick="location.href='/SnapShot/SignUp'">SignUp</button>
