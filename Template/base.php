@@ -20,13 +20,23 @@
         if(isset($templateParams["Type"])){
             require $templateParams["Type"];
         }
+
+        if(isset($_SESSION["username"])){
+            echo "Ciao ".$_SESSION["username"]."!";
+        }else{
+            echo "Non sei loggato!";
+        }
+
         ?>
         <div class="buttons">
-            <button class="mainbutton" onclick="location.href='./Home'">Home</a></button>
+            <button class="mainbutton" onclick="location.href='/SnapShot/Home'">Home</a></button>
             <button class="mainbutton" onclick="location.href='#'">Search</button>
             <button class="mainbutton" onclick="location.href='#'">Upload</button>
             <button class="mainbutton" onclick="location.href='#'">Notifications</button>
-            <button class="mainbutton" onclick="location.href='./Profile'">Profile</button>
+            <button class="mainbutton" onclick="location.href='/SnapShot/Profile'">Profile</button>
+            <button class="mainbutton" onclick="location.href='/SnapShot/SignUp'">SignUp</button>
+            <button class="mainbutton" onclick="location.href='/SnapShot/SignIn'">SignIn</button>
+            <button class="mainbutton" onclick="location.href='/SnapShot/Operations/SignOut.php'">SignOut</button>
         </div>
     </main>
 </body>
