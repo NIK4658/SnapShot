@@ -12,6 +12,9 @@ if (isset($_POST["username"]) && isset($_POST["password"]) && $_POST["username"]
             $dbh->createAccount($_POST["username"], $_POST["password"]);
             $_SESSION["username"] = $_POST["username"];
             $error=0;
+            if (!file_exists('../uploads/'.$_SESSION["username"].'/')) {
+                mkdir('../uploads/'.$_SESSION["username"].'/', 0777, true);
+            }
         }else{
             $error=1;
         }
