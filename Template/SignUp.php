@@ -8,6 +8,6 @@
 </form>
 <?php
 if(isset($_GET["error"])){
-  echo "Username already taken!";
+  echo "There was an error during the SignUp!";
 }
 ?>
