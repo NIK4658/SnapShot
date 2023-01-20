@@ -77,6 +77,19 @@ class DatabaseHelper{
     }
 
 
+    //non testata ma dovrebbe funzionare
+    public function get_last_n_images_posts($username, $n){
+        $query = "SELECT id FROM POST WHERE username = ? ORDER BY id DESC LIMIT $n";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s',$username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    
+
+
 
 
 
