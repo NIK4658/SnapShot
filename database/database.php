@@ -11,6 +11,15 @@ class DatabaseHelper{
         }
     }
 
+
+    public function get_account($username){
+        $stmt = $this->db->prepare("SELECT * FROM ACCOUNT WHERE username = ?");
+        $stmt->bind_param('s',$username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function get_password($username){
         $stmt = $this->db->prepare("SELECT password FROM ACCOUNT WHERE username = ?");
         $stmt->bind_param('s',$username);
