@@ -98,6 +98,7 @@ create table LOVE (
 create table ACCOUNT (
      id int not null auto_increment,
      username varchar(20) not null,
+     password varchar(20) not null,
      icon varchar(20) not null,
      bio varchar(50) not null,
      n_posts int not null,
