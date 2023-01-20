@@ -28,11 +28,10 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    //valutare di eliminare icon, bio, ecc.
     public function createAccount($username, $password){
-        $query = "INSERT INTO ACCOUNT (username, password, icon, bio, n_posts, n_followers, n_following) VALUES (?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO ACCOUNT (username, password) VALUES (?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ssssiii',$username, $password, "", "", 0, 0, 0);
+        $stmt->bind_param('ss',$username, $password);
         $stmt->execute();
         return $stmt->insert_id;
     }
