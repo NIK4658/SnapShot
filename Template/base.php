@@ -40,5 +40,9 @@
         </div>
     </main>
 </body>
-
+<?php
+if(isset($templateParams["Script"])){
+    echo "<script src='/SnapShot/javascript/".$templateParams["Script"]."' type='module'></script>";
+}
+?>
 </html>
