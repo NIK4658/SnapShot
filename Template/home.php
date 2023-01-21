@@ -1,7 +1,8 @@
+<div id="posts">
 <?php
 foreach ($Posts as $post):
 ?>
-    <div class="post">
+    <div class="post" id="post">
         <?php
         if ($post["location"] != null) { ?>
                 <div class="username_location">
@@ -49,3 +50,4 @@ foreach ($Posts as $post):
 <?php
 endforeach;
 ?>
+</div>
