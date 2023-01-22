@@ -11,6 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         is_uploaded_file($_FILES['fileToUpload']['tmp_name'])
     ) {
         $error = 0;
+        // $mainDir = "../uploads/";
         $target_dir = "../uploads/" . $_SESSION["username"] . "/";
         $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
         $uploadOk = 1;
@@ -26,6 +27,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Check if file already exists
         if (file_exists($target_file)) {
             $uploadOk = 0;
+        }
+
+        // Check if target dir exists
+        if (!is_dir($target_dir)) {
+            mkdir($target_dir, 0777, true);
         }
 
         // Check file size
@@ -44,6 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Move the image to the server
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                 chmod($target_file, 0777);
+                // unlink($target_file);
+                // rmdir($target_dir);
             } else {
                 $uploadOk = 0;
                 // $dbh->delete_post($_SESSION["username"], $postid);
@@ -60,7 +68,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-
 //Da migliorare
 if ($error == 0 && $uploadOk == 1) {
     header("Location: /SnapShot/");
