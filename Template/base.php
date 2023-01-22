@@ -17,6 +17,12 @@
 <body>
     <main>
         <?php
+        if(isset($templateParams["NeedLogin"]) && $templateParams["NeedLogin"] == true){
+            if(!isset($_SESSION["username"])){
+                header("Location: /SnapShot/SignIn");
+            }
+        }
+
         if(isset($templateParams["Type"])){
             require $templateParams["Type"];
         }
@@ -37,6 +43,7 @@
             <button class="mainbutton" onclick="location.href='/SnapShot/SignUp'">SignUp</button>
             <button class="mainbutton" onclick="location.href='/SnapShot/SignIn'">SignIn</button>
             <button class="mainbutton" onclick="location.href='/SnapShot/Operations/SignOut.php'">SignOut</button>
+            <button class="mainbutton" onclick="location.href='/SnapShot/CreatePost'">Create Post</button>
         </div>
     </main>
 </body>
