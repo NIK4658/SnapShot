@@ -1,6 +1,6 @@
 <?php
-session_start();
-if (isset($_SESSION["username"])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    session_start();
     $target_dir = "../uploads/" . $_SESSION["username"] . "/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
@@ -8,9 +8,7 @@ if (isset($_SESSION["username"])) {
 
     // Check if image file is a actual image or fake image
     if (isset($_POST["submit"])) {
-        if (getimagesize($_FILES["fileToUpload"]["tmp_name"])) {
-            $uploadOk = 1;
-        } else {
+        if (!getimagesize($_FILES["fileToUpload"]["tmp_name"])) {
             $uploadOk = 0;
         }
     }
@@ -30,18 +28,21 @@ if (isset($_SESSION["username"])) {
         $uploadOk = 0;
     }
 
+    // Move the image to the server
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+        chmod($target_file, 0777);
+    } else {
+        $uploadOk = 0;
+    }
+
     // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 1) {
-        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-            chmod($target_file, 0777);
-            header("Location: /SnapShot/");
-        } else {
-            header("Location: ../UploadImage?error=1");
-        }
+    if($uploadOk == 1){
+        header("Location: /SnapShot/");
     } else {
         header("Location: ../UploadImage?error=1");
     }
-}else{
-    header("Location: /SnapShot/SignIn");
+
+} else {
+    exit();
 }
 ?>
