@@ -9,13 +9,6 @@
 -- ********************************************* 
 
 
--- Database Section
--- ________________ 
-
-create database daImplementareNotifiche;
-use daImplementareNotifiche;
-
-
 -- Tables Section
 -- _____________ 
 
@@ -30,8 +23,8 @@ create table LOCATION (
 create table POST (
      username varchar(20) not null,
      id int not null,
-     date date default 'CURRENT_TIMESTAMP' not null,
-     description varchar(100) default '''' not null,
+     date date default CURRENT_TIMESTAMP not null,
+     description varchar(100) default '' not null,
      n_loves int default 0 not null,
      n_comments int default 0 not null,
      device varchar(20),
@@ -42,29 +35,29 @@ create table COMMENT1 (
      username_post varchar(20) not null,
      id_post int not null,
      id int not null,
-     date date default 'CURRENT_TIMESTAMP' not null,
+     date date default CURRENT_TIMESTAMP not null,
      comment varchar(100) not null,
      n_loves int default 0 not null,
      n_comments char(1) default '0' not null,
      username varchar(20) not null,
-     constraint IDPRIMARY COMMENT primary key (username_post, id_post, id));
+     constraint IDPRIMARY primary key (username_post, id_post, id));
 
 create table COMMENT2 (
      username_post varchar(20) not null,
      id_post int not null,
      id_comment int not null,
      id int not null,
-     date date default 'CURRENT_TIMESTAMP' not null,
+     date date default CURRENT_TIMESTAMP not null,
      comment char(100) not null,
      n_loves char(1) default '0' not null,
      username varchar(20) not null,
-     constraint IDSECONDARY COMMENT primary key (username_post, id_post, id_comment, id));
+     constraint IDSECONDARY primary key (username_post, id_post, id_comment, id));
 
 create table ACCOUNT (
      username varchar(20) not null,
      password char(20) not null,
-     icon varchar(20) default '''' not null,
-     bio varchar(50) default '''' not null,
+     icon varchar(20) default '' not null,
+     bio varchar(50) default '' not null,
      n_posts int default 0 not null,
      n_followers int default 0 not null,
      n_following int default 0 not null,
@@ -122,19 +115,19 @@ alter table POST add constraint FKposted
      foreign key (username)
      references ACCOUNT (username);
 
-alter table COMMENT1 add constraint FKprim com
+alter table COMMENT1 add constraint FKprim
      foreign key (username)
      references ACCOUNT (username);
 
-alter table COMMENT1 add constraint FKrelative post
+alter table COMMENT1 add constraint FKrelative
      foreign key (username_post, id_post)
      references POST (username, id);
 
-alter table COMMENT2 add constraint FKsecond com
+alter table COMMENT2 add constraint FKsecond2
      foreign key (username)
      references ACCOUNT (username);
 
-alter table COMMENT2 add constraint FKrelative comment
+alter table COMMENT2 add constraint FKrelative2
      foreign key (username_post, id_post, id_comment)
      references COMMENT1 (username_post, id_post, id);
 
@@ -169,8 +162,3 @@ alter table LOVE_POST add constraint FKlik_ACC
 alter table LOVE_POST add constraint FKlik_POS
      foreign key (username_post, id_post)
      references POST (username, id);
-
-
--- Index Section
--- _____________ 
-
