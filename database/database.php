@@ -76,35 +76,53 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    //NON TESTATA, PROBABILMENTE ERRORI NEL CODICE PHP
+
     //aggiungere description, device, location
     public function create_post($username, $description, $device, $location){
+        //Calculed numbers of id
         $query = "SELECT id FROM POST WHERE username = ? ";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('s',$username);
+        $stmt->bind_param('s', $username);
         $stmt->execute();
         $result = $stmt->get_result();
-        if($result->num_rows() == 0){
+
+        //if 0 create new post with id=0 else id=MAX(id)+1
+        if($result->num_rows == 0){
+            $id = 1;
             $query = "INSERT INTO POST (username, id) VALUES (?,?)";
             $stmt = $this->db->prepare($query);
-            $stmt->bind_param('si',$username, 1);
+            $stmt->bind_param('si', $username, $id);
         } else {
             $query = "INSERT INTO POST (id, username) SELECT MAX(id)+1, ? FROM POST WHERE username = ?";
             $stmt = $this->db->prepare($query);
-            $stmt->bind_param('ss',$username, $username);
+            $stmt->bind_param('ss', $username, $username);
         }
         $stmt->execute();
-        return $stmt->insert_id;
+
+        //Return id post created
+        $query = "SELECT MAX(id) FROM POST WHERE username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_row()[0];
     }
 
+    /*
      //NON TESTATA MA DOVREBBE FUNZIONARE
      public function get_last_n_images_posts($username, $n){
-        $query = "SELECT id FROM POST WHERE username = ? ORDER BY id DESC LIMIT $n";
+        get_last_n_images_posts_from($username, $n, 1);
+    }
+
+    //NON TESTATA MA DOVREBBE FUNZIONARE
+    public function get_last_n_images_posts_from($username, $n, $i){
+        $query = "SELECT id FROM POST WHERE id BETWEEN ? AND ? ORDER BY id DESC";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('s',$username);
+        $stmt->bind_param('ii', $i, $i+$n);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+    */
 }
 ?>
