@@ -1,5 +1,5 @@
 <h1>Create Post</h1>
-<form action="../Operations/CreatePost.php" method="post">
+<form action="../Operations/CreatePost.php" method="post" enctype="multipart/form-data">
     <label for="description">Description:</label>
     <input type="text" id="description" name="description"><br><br>
     <label for="location">Location:</label>
@@ -7,11 +7,11 @@
     <label for="device">Device:</label>
     <input type="device" id="device" name="device"><br><br>
     <img id="uploadPreview" style="width: 300px; height: 300px;" />
-    <input id="uploadImage" type="file" name="myPhoto" onchange="PreviewImage();"/>
+    <input id="fileToUpload" type="file" name="fileToUpload" onchange="PreviewImage();"/>
     <script type="text/javascript">
         function PreviewImage() {
             var oFReader = new FileReader();
-            oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+            oFReader.readAsDataURL(document.getElementById("fileToUpload").files[0]);
             oFReader.onload = function (oFREvent) {
                 document.getElementById("uploadPreview").src = oFREvent.target.result;
             };
