@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Check file size
-        if ($_FILES["fileToUpload"]["size"] > 200000) {
+        if ($_FILES["fileToUpload"]["size"] > 2000000) {
             $uploadOk = 0;
         }
 
@@ -44,27 +44,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $uploadOk = 0;
         }
 
-        $postid = $dbh->create_post($_SESSION["username"], $_POST["description"], $_POST["location"], $_POST["device"]);
-        if ($postid != -1) {
-            $target_file = $target_dir . $postid . "." . $imageFileType;
-            // Move the image to the server
-            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                chmod($target_file, 0777);
-                // unlink($target_file);
-                // rmdir($target_dir);
-            } else {
-                $uploadOk = 0;
-                // $dbh->delete_post($_SESSION["username"], $postid);
-            }
-        } else {
-            $uploadOk = 0;
-        }
-
-        // Check if $uploadOk is set to 0 by an error
         if ($uploadOk == 1) {
-            header("Location: /SnapShot/");
-        } else {
-            header("Location: ../UploadImage?error=1");
+            $postid = $dbh->create_post($_SESSION["username"], $_POST["description"], $_POST["location"], $_POST["device"]);
+            if ($postid != -1) {
+                $target_file = $target_dir . $postid . "." . $imageFileType;
+                // Move the image to the server
+                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                    chmod($target_file, 0777);
+                    // unlink($target_file);
+                    // rmdir($target_dir);
+                } else {
+                    $error = 1;
+                    // $dbh->delete_post($_SESSION["username"], $postid);
+                }
+            } else {
+                $error = 1;
+            }
         }
     }
 }
