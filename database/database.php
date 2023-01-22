@@ -78,7 +78,7 @@ class DatabaseHelper{
 
     //NON TESTATA, PROBABILMENTE ERRORI NEL CODICE PHP
     //aggiungere description, device, location
-    public function create_post($username){
+    public function create_post($username, $description, $device, $location){
         $query = "SELECT id FROM POST WHERE username = ? ";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s',$username);
