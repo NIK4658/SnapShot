@@ -78,34 +78,29 @@ class DatabaseHelper{
 
 
     //aggiungere description, device, location
+    //aggiungere n_posts in account
     public function create_post($username, $description, $device, $location){
-        //Calculed numbers of id
-        $query = "SELECT id FROM POST WHERE username = ? ";
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param('s', $username);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        //if 0 create new post with id=0 else id=MAX(id)+1
-        if($result->num_rows == 0){
-            $id = 1;
-            $query = "INSERT INTO POST (username, id) VALUES (?,?)";
-            $stmt = $this->db->prepare($query);
-            $stmt->bind_param('si', $username, $id);
-        } else {
-            $query = "INSERT INTO POST (id, username) SELECT MAX(id)+1, ? FROM POST WHERE username = ?";
-            $stmt = $this->db->prepare($query);
-            $stmt->bind_param('ss', $username, $username);
-        }
-        $stmt->execute();
-
-        //Return id post created
+        //Calculed id
         $query = "SELECT MAX(id) FROM POST WHERE username = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $username);
         $stmt->execute();
         $result = $stmt->get_result();
-        return $result->fetch_row()[0];
+        $id = $result->fetch_row()[0];
+        var_dump($id);//da togliere
+        if($id == null){
+            $id = 1;
+        } else {
+            $id++;
+        }
+        //Insert post with calculated id
+        $query = "INSERT INTO POST (username, id) VALUES (?,?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('si', $username, $id);
+        if (!$stmt->execute()){
+            return -1;
+        }
+        return $id;
     }
 
     /*
