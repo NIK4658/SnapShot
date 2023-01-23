@@ -200,6 +200,28 @@ class DatabaseHelper{
         return $id;
     }
 
-
+//FOLLOW
+    //DA TESTARE
+    //Username1 follows username2
+    public function follow($username1, $username2){
+        //Do follow
+        $query = "INSERT INTO FOLLOWER (follower, username) VALUES (?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('si', $username1, $username2);
+        if (!$stmt->execute()){
+            return false;
+        }
+        //Increment user1 following
+        $query = "UPDATE ACCOUNT SET n_following = n_following + 1 WHERE username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username1);
+        $stmt->execute();
+        //Increment user2 followers
+        $query = "UPDATE ACCOUNT SET n_followers = n_followers + 1 WHERE username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username2);
+        $stmt->execute();
+        return true;
+    }
 }
 ?>
