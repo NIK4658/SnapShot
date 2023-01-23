@@ -84,9 +84,26 @@ class DatabaseHelper{
     }
 
 
-    //aggiungere description, device, location
     //Return id if post created, else -1
     public function create_post($username, $description, $device, $location){
+        //Create new device if not exists
+        if (empty($device)) {
+            $device = NULL;
+        } else {
+            $query = "INSERT INTO DEVICE (name) VALUES (?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('s', $device);
+            $stmt->execute();
+        }
+        //Create new location if not exists
+        if (empty($location)) {
+            $location = NULL;
+        } else {
+            $query = "INSERT INTO LOCATION (name) VALUES (?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('s', $location);
+            $stmt->execute();
+        }
         //Calculate id
         $query = "SELECT MAX(id) FROM POST WHERE username = ?";
         $stmt = $this->db->prepare($query);
@@ -94,16 +111,15 @@ class DatabaseHelper{
         $stmt->execute();
         $result = $stmt->get_result();
         $id = $result->fetch_row()[0];
-        var_dump($id);//da togliere
         if($id == null){
             $id = 1;
         } else {
             $id++;
         }
         //Insert post with calculated id
-       
+        $query = "INSERT INTO POST (username, id, description, device, location) VALUES (?,?,?,?,?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('si', $username, $id, $description);
+        $stmt->bind_param('sisss', $username, $id, $description, $device, $location);
         if (!$stmt->execute()){
             return -1;
         }
@@ -136,7 +152,7 @@ class DatabaseHelper{
 
     //Return n last post from i (not included), n>0 and i=>0
     public function get_last_n_posts_from($username, $n, $i){
-        $query = "SELECT * FROM POST WHERE username = ? ORDER BY date DESC LIMIT ? OFFSET ?";
+        $query = "SELECT * FROM POST WHERE username = ? ORDER BY date DESC LIMIT ? OFFSET ?";//ritornare solo id?
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('sii', $username, $n, $i);
         $stmt->execute();
