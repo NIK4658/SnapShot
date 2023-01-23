@@ -7,7 +7,7 @@
     <label for="device">Device:</label>
     <input type="device" id="device" name="device"><br><br>
     <img id="uploadPreview" style="width: 300px; height: 300px;" />
-    <input id="fileToUpload" type="file" name="fileToUpload" onchange="PreviewImage();"/>
+    <input id="fileToUpload" type="file" name="fileToUpload" accept="image/png, image/jpeg, image/jpg" onchange="PreviewImage();"/>
     <script type="text/javascript">
         function PreviewImage() {
             var oFReader = new FileReader();
