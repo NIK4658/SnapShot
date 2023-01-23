@@ -170,5 +170,36 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+//COMMENT
+    //DA TESTARE
+    //Return id comment or -1 if error
+    public function create_comment1($user_post, $id_post, $user_comm, $comm){
+        //Calculate id
+        $query = "SELECT MAX(id) FROM COMMENT1 WHERE username_post = ? AND id_post = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('si', $user_post, $id_post);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $id = $result->fetch_row()[0];
+        if($id == null){
+            $id = 1;
+        } else {
+            $id++;
+        }
+        //Insert comment with calculated id
+        $query = "INSERT INTO COMMENT1 (username_post, id_post, username, comment, id) VALUES (?, ?, ?, ?, ? )";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('sissi', $user_post, $id_post, $user_comm, $comm, $id);
+        if (!$stmt->execute()){
+            return -1;
+        }
+        //Increment n comments in post
+        $query = "UPDATE POST SET n_comments = n_comments + 1 WHERE username = ? AND id_post = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('si', $user_post, $id_post);
+        return $id;
+    }
+
+
 }
 ?>
