@@ -107,9 +107,13 @@ class DatabaseHelper{
         if (!$stmt->execute()){
             return -1;
         }
-
-
-
+        
+        $query = "UPDATE ACCOUNT SET n_posts = n_posts + 1 WHERE username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username);
+        if (!$stmt->execute()){
+            return -1;
+        }
         return $id;
     }
 
