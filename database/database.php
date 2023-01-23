@@ -28,6 +28,13 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function get_account1(){
+        $stmt = $this->db->prepare("SELECT * FROM ACCOUNT");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function get_password($username){
         $stmt = $this->db->prepare("SELECT password FROM ACCOUNT WHERE username = ?");
         $stmt->bind_param('s',$username);
@@ -100,6 +107,9 @@ class DatabaseHelper{
         if (!$stmt->execute()){
             return -1;
         }
+
+
+
         return $id;
     }
 
