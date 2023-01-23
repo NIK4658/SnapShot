@@ -85,9 +85,9 @@ class DatabaseHelper{
 
 
     //aggiungere description, device, location
-    //aggiungere n_posts in account
+    //Return id if post created, else -1
     public function create_post($username, $description, $device, $location){
-        //Calculed id
+        //Calculate id
         $query = "SELECT MAX(id) FROM POST WHERE username = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $username);
@@ -107,7 +107,7 @@ class DatabaseHelper{
         if (!$stmt->execute()){
             return -1;
         }
-        
+        //Increment n posts in profile
         $query = "UPDATE ACCOUNT SET n_posts = n_posts + 1 WHERE username = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $username);
@@ -116,6 +116,30 @@ class DatabaseHelper{
         }
         return $id;
     }
+
+    //NON TESTATA
+    //Return true if post deleted, else false
+    public function delete_post($username,$id){
+        $query = "DELETE FROM `POST` WHERE username = ? AND id = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('si', $username, $id);
+        $stmt->execute();
+        if (!$stmt->execute()){
+            return false;
+        }
+        $query = "UPDATE ACCOUNT SET n_posts = n_posts - 1 WHERE username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        return true;
+    }
+
+
+
+
+
+
+
 
     /*
      //NON TESTATA MA DOVREBBE FUNZIONARE
