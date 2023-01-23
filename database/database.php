@@ -135,19 +135,15 @@ class DatabaseHelper{
     }
 
     //NON TESTATA
+    //Return n last post from i included, n>0 and i>0
     public function get_last_n_posts_from($username, $n, $i){
-        $query = "SELECT * FROM POST WHERE username = ? AND id BETWEEN ? AND ? ORDER BY id DESC";//ordinare by data
+        $query = "SELECT * FROM POST WHERE username = ? LIMIT ? OFFSET ? ORDER BY date DESC ";//ordinare by data?
         $stmt = $this->db->prepare($query);
-        $to = $i + $n;
-        $stmt->bind_param('sii', $username, $i, $to);
+        //$to = $i + $n - 1;
+        $stmt->bind_param('sii', $username, $n, $i);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
-    }
-    
-    //NON TESTATA
-    public function get_last_n_posts($username, $n){
-        $this->get_last_n_posts_from($username, $n, 0);
     }
 
 }
