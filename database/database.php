@@ -134,28 +134,21 @@ class DatabaseHelper{
         return true;
     }
 
-
-
-
-
-
-
-
-    /*
-     //NON TESTATA MA DOVREBBE FUNZIONARE
-     public function get_last_n_images_posts($username, $n){
-        get_last_n_images_posts_from($username, $n, 1);
-    }
-
-    //NON TESTATA MA DOVREBBE FUNZIONARE
-    public function get_last_n_images_posts_from($username, $n, $i){
-        $query = "SELECT id FROM POST WHERE id BETWEEN ? AND ? ORDER BY id DESC";
+    //NON TESTATA
+    public function get_last_n_posts_from($username, $n, $i){
+        $query = "SELECT * FROM POST WHERE id BETWEEN ? AND ? ORDER BY id DESC";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ii', $i, $i+$n);
+        $to = $i + $n;
+        $stmt->bind_param('ii', $i, $to);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-    */
+    
+    //NON TESTATA
+    public function get_last_n_posts($username, $n){
+        $this->get_last_n_posts_from($username, $n, 1);
+    }
+
 }
 ?>
