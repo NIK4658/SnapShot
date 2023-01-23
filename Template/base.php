@@ -28,9 +28,9 @@
         }
 
         if(isset($_SESSION["username"])){
-            echo "Ciao ".$_SESSION["username"]."!";
+            echo "Logged in with the user: ".$_SESSION["username"];
         }else{
-            echo "Non sei loggato!";
+            echo "You are not logged in.";
         }
 
         ?>
@@ -44,6 +44,7 @@
             <button class="mainbutton" onclick="location.href='/SnapShot/SignIn'">SignIn</button>
             <button class="mainbutton" onclick="location.href='/SnapShot/Operations/SignOut.php'">SignOut</button>
             <button class="mainbutton" onclick="location.href='/SnapShot/CreatePost'">Create Post</button>
+            <button class="mainbutton" onclick="location.href='/SnapShot/Follows'">Follows</button>
         </div>
     </main>
 </body>
