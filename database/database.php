@@ -136,10 +136,10 @@ class DatabaseHelper{
 
     //NON TESTATA
     public function get_last_n_posts_from($username, $n, $i){
-        $query = "SELECT * FROM POST WHERE id BETWEEN ? AND ? ORDER BY id DESC";
+        $query = "SELECT * FROM POST WHERE username = ? AND id BETWEEN ? AND ? ORDER BY id DESC";//ordinare by data
         $stmt = $this->db->prepare($query);
         $to = $i + $n;
-        $stmt->bind_param('ii', $i, $to);
+        $stmt->bind_param('sii', $username, $i, $to);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
@@ -147,7 +147,7 @@ class DatabaseHelper{
     
     //NON TESTATA
     public function get_last_n_posts($username, $n){
-        $this->get_last_n_posts_from($username, $n, 1);
+        $this->get_last_n_posts_from($username, $n, 0);
     }
 
 }
