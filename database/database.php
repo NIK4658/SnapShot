@@ -11,6 +11,8 @@ class DatabaseHelper{
         }
     }
 
+
+//PROFILO
     public function create_account($username, $password){
         $query = "INSERT INTO ACCOUNT (username, password) VALUES (?, ?)";
         $stmt = $this->db->prepare($query);
@@ -19,7 +21,6 @@ class DatabaseHelper{
         return $stmt->insert_id;
     }
 
-//PROFILO
     public function get_account($username){
         $stmt = $this->db->prepare("SELECT * FROM ACCOUNT WHERE username = ?");
         $stmt->bind_param('s',$username);
@@ -84,6 +85,7 @@ class DatabaseHelper{
     }
 
 
+//POST
     //Return id if post created, else -1
     public function create_post($username, $description, $device, $location){
         //Create new device if not exists
@@ -133,7 +135,6 @@ class DatabaseHelper{
         return $id;
     }
 
-    //NON TESTATA
     //Return true if post deleted, else false
     public function delete_post($username,$id){
         $query = "DELETE FROM `POST` WHERE username = ? AND id = ?";
