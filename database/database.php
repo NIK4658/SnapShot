@@ -101,9 +101,9 @@ class DatabaseHelper{
             $id++;
         }
         //Insert post with calculated id
-        $query = "INSERT INTO POST (username, id) VALUES (?,?)";
+       
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('si', $username, $id);
+        $stmt->bind_param('si', $username, $id, $description);
         if (!$stmt->execute()){
             return -1;
         }
@@ -139,6 +139,15 @@ class DatabaseHelper{
         $query = "SELECT * FROM POST WHERE username = ? ORDER BY date DESC LIMIT ? OFFSET ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('sii', $username, $n, $i);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function get_post($username, $id){
+        $query = "SELECT * FROM POST WHERE username = ? AND id = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('si', $username, $id);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
