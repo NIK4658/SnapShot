@@ -207,7 +207,7 @@ class DatabaseHelper{
         //Do follow
         $query = "INSERT INTO FOLLOWER (follower, username) VALUES (?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('si', $username1, $username2);
+        $stmt->bind_param('ss', $username1, $username2);
         if (!$stmt->execute()){
             return false;
         }
