@@ -161,6 +161,7 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    //Return post specified by username and id
     public function get_post($username, $id){
         $query = "SELECT * FROM POST WHERE username = ? AND id = ?";
         $stmt = $this->db->prepare($query);
@@ -194,7 +195,7 @@ class DatabaseHelper{
             return -1;
         }
         //Increment n comments in post
-        $query = "UPDATE POST SET n_comments = n_comments + 1 WHERE username = ? AND id_post = ?";
+        $query = "UPDATE POST SET n_comments = n_comments + 1 WHERE username = ? AND id = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('si', $user_post, $id_post);
         return $id;
