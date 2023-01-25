@@ -172,10 +172,10 @@ class DatabaseHelper{
     }
 
     //Return post's loves
-    public function get_love_post($username_post, $id_post, $username){
+    public function get_love_post($username_post, $id_post){
         $query = "SELECT * FROM LOVE_POST  WHERE username_post = ? AND id_post = ?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('sis', $username_post, $id_post, $username);
+        $stmt->bind_param('si', $username_post, $id_post);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
