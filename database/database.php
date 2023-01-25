@@ -248,7 +248,20 @@ class DatabaseHelper{
         return true;
     }
 
- 
+    //DA TESTARE
+    //Return true if username1 is following username2
+    public function is_following($username1, $username2){
+        $query = "SELECT COUNT(*) FROM FOLLOWER WHERE follower = ? AND username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ss', $username1, $username2);
+        $stmt->execute();
+        if ($stmt->get_result()->fetch_row()[0] == 0){
+            return false;
+        }
+        return true;
+    }
+
+
 
 }
 ?>
