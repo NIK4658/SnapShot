@@ -171,6 +171,40 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    //Add love in the post and return true, if already love remove love and return false
+    public function love_post($username_post, $id_post, $username){
+        //Check if there is already love
+        $query = "SELECT COUNT(*) FROM LOVE_POST WHERE username_post = ? AND id_post = ? AND username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('sis', $username_post, $id_post, $username);
+        $stmt->execute();
+        if ($stmt->get_result()->fetch_row()[0] == 0){
+            //Add the love
+            $query = "INSERT INTO LOVE_POST VALUES (?, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('siis', $username_post, $id_post, $username);
+            $stmt->execute();
+            //Increment n loves in post
+            $query = "UPDATE POST SET n_loves = n_loves + 1 WHERE username = ? AND id = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('si', $username_post, $id_post);
+            $stmt->execute();
+            return true;
+        } else {
+            //Remove the love
+            $query = "DELETE FROM LOVE_POST WHERE username_post = ? AND ? AND username = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('sis', $username_post, $id_post, $username);
+            $stmt->execute();
+            //Decrement n loves in post
+            $query = "UPDATE POST SET n_loves = n_loves - 1 WHERE username = ? AND id = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('si', $username_post, $id_post);
+            $stmt->execute();
+            return false;
+        }
+    }
+
     //Return post's loves
     public function get_love_post($username_post, $id_post){
         $query = "SELECT * FROM LOVE_POST  WHERE username_post = ? AND id_post = ?";
