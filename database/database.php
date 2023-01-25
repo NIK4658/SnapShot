@@ -213,6 +213,31 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    //DA TESTARE
+    //Add love in the comment and return true, if already love, remove love and return false
+    public function love_comment1($username_post, $id_post, $id_comment, $username){
+        //Check if there is already love
+        $query = "SELECT COUNT(*) FROM LOVE_COMMENT1 WHERE username_post = ? AND id_post = ? AND id_comment1 = ? AND username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('siis', $username_post, $id_post, $id_comment, $username);
+        $stmt->execute();
+        if ($stmt->get_result()->fetch_row()[0] == 0){
+            //Add the love
+            $query = "INSERT INTO LOVE_COMMENT1 VALUES (?, ?, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('siis', $username_post, $id_post, $id_comment, $username);
+            $stmt->execute();
+            return true;
+        } else {
+            //Remove the love
+            $query = "DELETE FROM LOVE_COMMENT1 WHERE username_post = ? AND ? AND ? AND username = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('siis', $username_post, $id_post, $id_comment, $username);
+            $stmt->execute();
+            return false;
+        }
+    }
+
 
 //FOLLOW
     //DA TESTARE
