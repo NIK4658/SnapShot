@@ -129,9 +129,7 @@ class DatabaseHelper{
         $query = "UPDATE ACCOUNT SET n_posts = n_posts + 1 WHERE username = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $username);
-        if (!$stmt->execute()){
-            return -1;
-        }
+        $stmt->execute();
         return $id;
     }
 
@@ -243,6 +241,7 @@ class DatabaseHelper{
         $query = "UPDATE POST SET n_comments = n_comments + 1 WHERE username = ? AND id = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('si', $user_post, $id_post);
+        $stmt->execute();
         return $id;
     }
 
