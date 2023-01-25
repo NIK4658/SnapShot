@@ -171,6 +171,7 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+
 //COMMENT
     //DA TESTARE
     //Return id comment or -1 if error
@@ -201,6 +202,18 @@ class DatabaseHelper{
         return $id;
     }
 
+    //DA TESTARE
+    //Return n last comment1 from i (not included), n>0 and i=>0
+    public function get_last_n_comments1_from($username, $id, $n, $i){
+        $query = "SELECT * FROM COMMENT1 WHERE username = ? AND id_post = ? ORDER BY date DESC LIMIT ? OFFSET ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('siii', $username, $id, $n, $i);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
 //FOLLOW
     //DA TESTARE
     //Username1 follows username2
@@ -224,7 +237,6 @@ class DatabaseHelper{
         $stmt->execute();
         return true;
     }
-    
     
     //DA TESTARE
     //Username1 unfollows username2
