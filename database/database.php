@@ -271,12 +271,22 @@ class DatabaseHelper{
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('siis', $username_post, $id_post, $id_comment, $username);
             $stmt->execute();
+            //Increment n loves in comment
+            $query = "UPDATE COMMENT1 SET n_loves = n_loves + 1 WHERE username_post = ? AND id_post = ? AND id = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('sii', $username_post, $id_post, $id);
+            $stmt->execute();
             return true;
         } else {
             //Remove the love
             $query = "DELETE FROM LOVE_COMMENT1 WHERE username_post = ? AND ? AND ? AND username = ?";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('siis', $username_post, $id_post, $id_comment, $username);
+            $stmt->execute();
+            //Decrement n loves in comment
+            $query = "UPDATE COMMENT1 SET n_loves = n_loves + 1 WHERE username_post = ? AND id_post = ? AND id = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('sii', $username_post, $id_post, $id);
             $stmt->execute();
             return false;
         }
