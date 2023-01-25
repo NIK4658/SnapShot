@@ -223,5 +223,32 @@ class DatabaseHelper{
         $stmt->execute();
         return true;
     }
+    
+    
+    //DA TESTARE
+    //Username1 unfollows username2
+    public function unfollow($username1, $username2){
+        //Do unfollow
+        $query = "DELETE FROM FOLLOWER WHERE follower = ? AND username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ss', $username1, $username2);
+        if (!$stmt->execute()){
+            return false;
+        }
+        //Decrement user1 following
+        $query = "UPDATE ACCOUNT SET n_following = n_following - 1 WHERE username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username1);
+        $stmt->execute();
+        //Decrement user2 followers
+        $query = "UPDATE ACCOUNT SET n_followers = n_followers - 1 WHERE username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username2);
+        $stmt->execute();
+        return true;
+    }
+
+ 
+
 }
 ?>
