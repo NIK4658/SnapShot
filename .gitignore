@@ -1,6 +1,7 @@
 /database/credentials.php
 /uploads/
-.DS_Store
+/css/
+
 
 #File MacOs
 .DS_Store
