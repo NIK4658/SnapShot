@@ -56,6 +56,17 @@ if (isset($_POST['getMatchingUsers'])) {
     echo json_encode($users);
 }
 
+if (isset($_POST['getPost'])) {
+    $post = $dbconnection->getPost($_POST['postid']);
+    echo json_encode($post);
+}
+
+if (isset($_POST['getPostLikesPeople'])) {
+    $users = $dbconnection->getPostLikesPeople($_POST['postid']);
+    echo json_encode($users);
+}
+
+
 if (isset($_POST['likePost'])) {
     $dbconnection->likePost($_POST['postId'], $_POST['owner']);
 }
@@ -161,6 +172,16 @@ if (isset($_POST['getProfilePosts'])) {
 if (isset($_POST['getUserData'])) {
     $user = $dbconnection->getUserData($_SESSION['username']);
     echo json_encode($user);
+}
+
+if (isset($_POST['getUserFollowers'])) {
+    $users = $dbconnection->getUserFollowers($_POST['username']);
+    echo json_encode($users);
+}
+
+if (isset($_POST['getUserFollowing'])) {
+    $users = $dbconnection->getUserFollowing($_POST['username']);
+    echo json_encode($users);
 }
 
 if (isset($_POST['getUserProfileImage'])) {
