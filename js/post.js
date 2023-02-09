@@ -7,6 +7,9 @@ function getPostContainer(postId, owner, caption, liked, rated) {
     postDiv.id = "post" + postId;
 
     let postImagesDiv = document.createElement("div");
+    // postImagesDiv.onclick = function () {
+    //     window.location.href = "post.php?post=" + postId;
+    // };
     postImagesDiv.className = "post-image-container";
     postImagesDiv.id = "post-image-container" + postId;
 
@@ -44,6 +47,9 @@ function getPostContainer(postId, owner, caption, liked, rated) {
     let likesNumber = document.createElement("span");
     likesNumber.className = "likes-number";
     likesNumber.id = "likes-number" + postId;
+    likesNumber.onclick = function () {
+        window.location.href = "likes.php?post=" + postId;
+    };
     likesNumber.textContent = 0;
     likeButton.appendChild(likeButtonIcon);
 
@@ -211,6 +217,39 @@ function getPostContainer(postId, owner, caption, liked, rated) {
 
     return postDiv;
 }
+
+//DA FIXARE
+// function getSinglePost(postid) {
+//     $.post("./post_requests_handler.php", { getPost: true, postid: postid }, function (result) {
+//         const MainPageDiv = document.getElementById("post-page");
+//         postDiv = getPostContainer(post.post_id, post.owner, post.caption, post.liked, post.rated);
+//         MainPageDiv.appendChild(postDiv);
+//             retrieveImages(post.post_id);
+//             retrieveLikesNumber(post.post_id);
+//             retrieveComments(post.post_id, result.currentUsername);
+//             setInterval(function () {
+//                 retrieveLikesNumber(post.post_id);
+//             }, 1000);
+//             setInterval(function () {
+//                 retrieveComments(post.post_id, result.currentUsername);
+//             }, 1000);
+
+//         if (postsNumber === 0) {
+//             MainPageDiv.innerHTML = "";
+//             let noPostsDiv = document.createElement("div");
+//             noPostsDiv.className = "no-matches-found";
+//             let noPostsHeader = document.createElement("h2");
+//             noPostsHeader.textContent = "Nothing to see here... Follow someone first!";
+//             noPostsHeader.style.textAlign = "center";
+//             let noPostsIcon = document.createElement("span");
+//             noPostsIcon.className = "fa-regular fa-face-frown-slight";
+//             noPostsDiv.appendChild(noPostsHeader);
+//             noPostsDiv.appendChild(noPostsIcon);
+//             MainPageDiv.appendChild(noPostsDiv);
+//         }
+//     }, "json");
+// }
+
 
 function getCommentsContainer(postId, postCommentsDiv, comments, currentUsername) {
     postCommentsDiv.innerHTML = "";
