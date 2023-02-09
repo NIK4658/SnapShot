@@ -14,8 +14,8 @@
         <div class="profile-specs">
             <div id='profile-stats' class="profile-stats">
                 <p><span id='posts' class="stat"></span> posts</p>
-                <p><span id='followers' class="stat"></span> followers</p>
-                <p><span id='following' class="stat"></span> following</p>
+                <p id='pFollowers'><span id='followers' class="stat"></span> followers</p>
+                <p id='pFollowing'><span id='following' class="stat"></span> following</p>
                 <p><button id='follow-unfollow-button' class="text-button"></button>
             </div>
         </div>
