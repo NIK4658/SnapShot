@@ -3,9 +3,17 @@
 namespace app;
 
 require_once 'query.php';
+require_once 'credentials.php';
+
+
+$GLOBALS["Username"] = $Credentials["Username"];
+$GLOBALS["Password"] = $Credentials["Password"];
+$GLOBALS["Address"] = $Credentials["Address"];
+$GLOBALS["Database"] = $Credentials["Database"];
+
 
 use mysqli;
-use DateTime;
+
 
 
 class DBConnection
@@ -14,7 +22,7 @@ class DBConnection
 
     public function __construct()
     {
-        $this->conn = new mysqli("", "", "", "");
+        $this->conn = new mysqli($GLOBALS['Address'], $GLOBALS["Username"], $GLOBALS["Password"], $GLOBALS["Database"]);
         if ($this->conn->connect_error) {
             echo "Connection failed: " . $this->conn->connect_error;
         }
