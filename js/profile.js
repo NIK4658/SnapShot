@@ -103,8 +103,19 @@ function showProfile() {
     let postsNumber = document.getElementById("posts");
     let followersNumber = document.getElementById("followers");
     let followingNumber = document.getElementById("following");
+    let followersP = document.getElementById("pFollowers");
+    let followingP = document.getElementById("pFollowing");
     postsNumber.textContent = result.profileData.numberPosts;
     followersNumber.textContent = result.profileData.numberFollowers;
+
+    followersP.onclick = function () {
+      window.location.href = "./followers.php?username=" + username;
+    };
+
+    followingP.onclick = function () {
+      window.location.href = "./following.php?username=" + username;
+    };
+
     followingNumber.textContent = result.profileData.numberFollowings;
 
     let exposureValue = document.getElementById("exposure");
@@ -200,6 +211,11 @@ function getGridViewPostContainer(postId, owner) {
   imageDiv.className = "post-image-container";
   let postImage = document.createElement("img");
   postImage.id = "post-image-container" + postId;
+
+
+  imageDiv.onclick = function () {
+    window.location.href = "./post.php?postId=" + postId;
+  };
 
   // let fullScreenButton = document.createElement("button");
   // fullScreenButton.className = "icon-button full-screen-button";
