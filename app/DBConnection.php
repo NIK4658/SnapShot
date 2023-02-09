@@ -253,6 +253,56 @@ class DBConnection
         return 0;
     }
 
+    public function getPostLikesPeople($postid)
+    {
+        if ($postid == '') {
+            return array();
+        }
+        $stmt = $this->conn->prepare(QUERIES['get_post_likes_people']);
+        $stmt->bind_param('i', $postid);
+        $stmt->execute();
+        $users = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        return $users;
+    }
+
+    public function getUserFollowers($username)
+    {
+        if ($username == '') {
+            return array();
+        }
+        $stmt = $this->conn->prepare(QUERIES['get_user_followers']);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $users = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        return $users;
+    }
+
+    public function getUserFollowing($username)
+    {
+        if ($username == '') {
+            return array();
+        }
+        $stmt = $this->conn->prepare(QUERIES['get_user_following']);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $users = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        return $users;
+    }
+
+
+    public function getPost($postId)
+    {
+        $stmt = $this->conn->prepare(QUERIES['get_post']);
+        $stmt->bind_param("i", $postId);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    
+        return $result;
+    }
+
     public function getPostImages($postId)
     {
         $stmt = $this->conn->prepare(QUERIES['get_post_images']);
