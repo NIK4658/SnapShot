@@ -1,0 +1,1 @@
+<div id="likes-page" class="likes-page"></div>
