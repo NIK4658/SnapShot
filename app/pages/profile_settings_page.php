@@ -1,4 +1,4 @@
-<form id="edit-profile-form" action="">
+<form id="edit-profile-form" action="#">
     <div class="save-button">
         <button id="save-button" type="submit">Save</button>
     </div>
