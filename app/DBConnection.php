@@ -4,6 +4,7 @@ namespace app;
 
 require_once 'query.php';
 require_once 'credentials.php';
+require_once('email_notification/sendEmail.php');
 
 
 $GLOBALS["Username"] = $Credentials["Username"];
@@ -13,7 +14,7 @@ $GLOBALS["Database"] = $Credentials["Database"];
 
 
 use mysqli;
-
+use EmailSender;
 
 
 class DBConnection
@@ -75,6 +76,8 @@ class DBConnection
             $stmt = $this->conn->prepare(QUERIES['send_notification']);
             $stmt->bind_param('sss', $text, $receiver, $_SESSION['username']);
             $stmt->execute();
+            $to = $this->getUserData($receiver);
+            echo EmailSender::sendEmail($to['email'] , "You have a new Notification", $_SESSION['username']." ".$text );
         }
     }
 
