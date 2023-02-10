@@ -1,4 +1,5 @@
 app/credentials.php
+app/email_notification/credentialsemail.php
 /uploads/
 /css/
 
