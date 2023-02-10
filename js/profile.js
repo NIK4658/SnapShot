@@ -211,6 +211,7 @@ function getGridViewPostContainer(postId, owner) {
   imageDiv.className = "post-image-container";
   let postImage = document.createElement("img");
   postImage.id = "post-image-container" + postId;
+  postImage.alt = "Post image";
 
 
   imageDiv.onclick = function () {
