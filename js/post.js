@@ -304,7 +304,7 @@ function getCommentsContainer(postId, postCommentsDiv, comments, currentUsername
 
         let replyButton = document.createElement("button");
         replyButton.className = "post-button reply-button";
-        replyButton.id = "icon-button reply-button" + comments[i].comment_id;
+        replyButton.id = "icon-button-reply-button" + comments[i].comment_id;
         replyButton.type = "button";
         replyButton.textContent = "Reply";
         replyButton.onclick = function () {
