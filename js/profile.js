@@ -142,12 +142,14 @@ function follow() {
   $.post("./post_requests_handler.php", { follow: true, username: username });
   followUnfollowButton.textContent = "Unfollow";
   followUnfollowButton.onclick = unfollow;
+  location.reload();
 }
 
 function unfollow() {
   $.post("./post_requests_handler.php", { unfollow: true, username: username });
   followUnfollowButton.textContent = "Follow";
   followUnfollowButton.onclick = follow;
+  location.reload();
 }
 
 /*
