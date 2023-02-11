@@ -58,7 +58,8 @@ if (isset($_POST['getMatchingUsers'])) {
 
 if (isset($_POST['getPost'])) {
     $post = $dbconnection->getPost($_POST['postid']);
-    echo json_encode($post);
+    $isLiked = $dbconnection->isLiked($_POST['postid'], $_SESSION['username']);
+    echo json_encode(array('post' => $post, 'currentUsername' => $_SESSION['username'], 'isLiked' => $isLiked));
 }
 
 if (isset($_POST['getPostLikesPeople'])) {
@@ -90,6 +91,7 @@ if (isset($_POST['likeComment'])) {
 if (isset($_POST['unlikeComment'])) {
     $dbconnection->unlikeComment($_POST['commentId']);
 }
+
 
 // if (isset($_POST['ratePost'])) {
 //     $dbconnection->ratePost($_POST['postId'], $_POST['owner'], $_POST['exposure'], $_POST['colors'], $_POST['composition']);
