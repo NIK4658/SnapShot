@@ -330,6 +330,22 @@ class DBConnection
 
     public function createPost($caption, $images, $place, $device)
     {
+        $stmt = $this->conn->prepare(QUERIES['search_location']);
+        $stmt->bind_param("s", $place);
+        $stmt->execute();
+        if($stmt->get_result()->num_rows == 0){
+            $stmt = $this->conn->prepare(QUERIES['add_location']);
+            $stmt->bind_param("s", $place);
+            $stmt->execute();
+        }
+        $stmt = $this->conn->prepare(QUERIES['search_device']);
+        $stmt->bind_param("s", $device);
+        $stmt->execute();
+        if($stmt->get_result()->num_rows == 0){
+            $stmt = $this->conn->prepare(QUERIES['add_device']);
+            $stmt->bind_param("s", $device);
+            $stmt->execute();
+        }
         $stmt = $this->conn->prepare(QUERIES['add_post']);
         $stmt->bind_param("ssss", $caption, $_SESSION['username'], $place, $device);
         $stmt->execute();
