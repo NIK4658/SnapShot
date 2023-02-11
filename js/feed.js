@@ -34,12 +34,12 @@ export function getFeedPosts(offset, limit) {
             let noPostsDiv = document.createElement("div");
             noPostsDiv.className = "no-matches-found";
             let noPostsHeader = document.createElement("h2");
-            noPostsHeader.textContent = "Nothing to see here... Follow someone first!";
+            noPostsHeader.textContent = "Follow someone first and then come back!";
             noPostsHeader.style.textAlign = "center";
-            let noPostsIcon = document.createElement("span");
-            noPostsIcon.className = "fa-regular fa-face-frown-slight";
+            // let noPostsIcon = document.createElement("span");
+            // noPostsIcon.className = "fa-regular fa-face-frown-slight";
             noPostsDiv.appendChild(noPostsHeader);
-            noPostsDiv.appendChild(noPostsIcon);
+            // noPostsDiv.appendChild(noPostsIcon);
             homePageDiv.appendChild(noPostsDiv);
         }
     }, "json");
