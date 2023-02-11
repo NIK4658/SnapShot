@@ -411,6 +411,20 @@ class DBConnection
         $stmt->execute();
     }
 
+
+    public function isLiked($postId, $owner)
+    {
+        $stmt = $this->conn->prepare(QUERIES['isLiked']);
+        $stmt->bind_param("is", $postId, $_SESSION['username']);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        if($result['NumberLikes']==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function likeComment($commentId, $owner)
     {
         $stmt = $this->conn->prepare(QUERIES['like_comment']);
