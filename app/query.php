@@ -37,6 +37,7 @@ const QUERIES = [
     "get_user_posts" => "SELECT p.post_id, p.caption, p.`timestamp`, p.average_exposure_rating, p.average_colors_rating, p.average_composition_rating, p.username AS owner, pl.username, pr.username AS rated FROM post p LEFT JOIN post_like pl ON p.post_id = pl.post_id AND pl.username = ? LEFT JOIN post_rating pr ON p.post_id = pr.post_id AND pr.username = ? WHERE p.username = ? ORDER BY p.`timestamp` DESC LIMIT ?, ?",
     "like_comment" => "INSERT INTO comment_like (comment_id, username) VALUES (?, ?)",
     "unlike_comment" => "DELETE FROM comment_like WHERE comment_id = ? AND username = ?",
+    "isLiked" => "SELECT COUNT(*) AS NumberLikes FROM post_like WHERE post_id = ? AND username = ?",
     // "rate_post" => "INSERT INTO post_rating (post_id, username, exposure, colors, composition) VALUES (?, ?, ?, ?, ?)",
     // "update_average_post_rating" => "UPDATE post SET average_exposure_rating = (SELECT AVG(exposure) FROM post_rating WHERE post_id = ?), average_colors_rating = (SELECT AVG(colors) FROM post_rating WHERE post_id = ?), average_composition_rating = (SELECT AVG(composition) FROM post_rating WHERE post_id = ?) WHERE post_id = ?",
     // "get_average_post_rating" => "SELECT average_exposure_rating, average_colors_rating, average_composition_rating FROM post WHERE post_id = ?",
