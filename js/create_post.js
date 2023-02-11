@@ -3,8 +3,12 @@ import { showSnackbar } from "./utils.js";
 const addImageButton = document.getElementById("add-image-button");
 const imagesContainer = document.getElementById("images-container");
 const captionTextArea = document.getElementById("caption");
-const maxLength = captionTextArea.maxLength;
-const remainingCharactersSpan = document.getElementById("remaining-characters");
+const placeTextArea = document.getElementById("place");
+const deviceTextArea = document.getElementById("device");
+const cRemainingCharactersSpan = document.getElementById("remaining-characters");
+const pRemainingCharactersSpan = document.getElementById("place-remaining-characters");
+const dRemainingCharactersSpan = document.getElementById("device-remaining-characters");
+//const remainingCharactersSpan = document.getElementById("remaining-characters");
 const createPostButton = document.getElementById("create-post-button");
 
 let images = [];
@@ -13,7 +17,15 @@ const MAX_IMAGES = 5;
 addImageButton.onclick = addImage;
 
 captionTextArea.oninput = function () {
-    remainingCharactersSpan.innerText = captionTextArea.value.length + "/" + maxLength;
+    cRemainingCharactersSpan.innerText = captionTextArea.value.length + "/" + captionTextArea.maxLength;
+}
+
+placeTextArea.oninput = function () {
+    pRemainingCharactersSpan.innerText = placeTextArea.value.length + "/" + placeTextArea.maxLength;
+}
+
+deviceTextArea.oninput = function () {
+    dRemainingCharactersSpan.innerText = deviceTextArea.value.length + "/" + deviceTextArea.maxLength;
 }
 
 createPostButton.onclick = createPost;
@@ -180,6 +192,8 @@ function createPost() {
         createPost: true,
         images: images,
         caption: document.getElementById('caption').value,
+        place: document.getElementById('place').value,
+        device: document.getElementById('device').value
     }
 
     if (images.length == 0) {

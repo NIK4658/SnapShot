@@ -188,7 +188,6 @@ class DBConnection
             while ($row = $result->fetch_assoc()) {
                 $post = $row;
                 $post['liked'] = isset($row['username']);
-                $post['rated'] = isset($row['rated']);
                 unset($post['username']);
 
                 array_push($posts, $post);
@@ -208,7 +207,7 @@ class DBConnection
             while ($row = $result->fetch_assoc()) {
                 $post = $row;
                 $post['liked'] = isset($row['username']);
-                $post['rated'] = isset($row['rated']);
+                //$post['rated'] = isset($row['rated']);
                 unset($post['username']);
 
                 array_push($posts, $post);
@@ -329,10 +328,10 @@ class DBConnection
         return $result['image'];
     }
 
-    public function createPost($caption, $images)
+    public function createPost($caption, $images, $place, $device)
     {
         $stmt = $this->conn->prepare(QUERIES['add_post']);
-        $stmt->bind_param("ss", $caption, $_SESSION['username']);
+        $stmt->bind_param("ssss", $caption, $_SESSION['username'], $place, $device);
         $stmt->execute();
         $this->addPostImages($this->conn->insert_id, $images);
     }

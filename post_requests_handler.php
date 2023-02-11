@@ -44,7 +44,7 @@ if (isset($_POST['getNotSeenNotificationsNumber'])) {
 }
 
 if (isset($_POST["createPost"])) {
-    $dbconnection->createPost($_POST['caption'], $_POST['images']);
+$dbconnection->createPost($_POST['caption'], $_POST['images'], $_POST['place'], $_POST['device']);
 }
 
 if (isset($_POST['deletePost'])) {

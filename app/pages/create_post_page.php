@@ -15,5 +15,19 @@
             <span id="remaining-characters" class="remaining-characters">0/200</span>
         </div>
     </div>
+
+    <div id='extra-form' class="extra-form">
+        <h2>Location</h2>
+        <div class="textarea">
+            <textarea id='place' name='place' maxlength="20" title="location" aria-label="location"></textarea>
+            <span id="place-remaining-characters" class="remaining-characters">0/20</span>
+        </div>
+        <h2>Device</h2>
+        <div class="textarea">
+            <textarea id='device' name='device' maxlength="20" title="device" aria-label="device"></textarea>
+            <span id="device-remaining-characters" class="remaining-characters">0/20</span>
+        </div>
+    </div>
+
     <button type='button' class='text-button' id='create-post-button'>Post</button>
 </div>
