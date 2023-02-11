@@ -12,7 +12,7 @@ const dRemainingCharactersSpan = document.getElementById("device-remaining-chara
 const createPostButton = document.getElementById("create-post-button");
 
 let images = [];
-const MAX_IMAGES = 5;
+const MAX_IMAGES = 1;
 
 addImageButton.onclick = addImage;
 
