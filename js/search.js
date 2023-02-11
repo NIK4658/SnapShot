@@ -43,10 +43,10 @@ function getMatchingUsers(username) {
             noMatchesDiv.className = "no-matches-found";
             let noMatchesHeader = document.createElement("h2");
             noMatchesHeader.textContent = "No matches found";
-            let noMatchesIcon = document.createElement("span");
-            noMatchesIcon.className = "fa-regular fa-face-frown-slight";
+            // let noMatchesIcon = document.createElement("span");
+            // noMatchesIcon.className = "fa-regular fa-face-frown-slight";
             noMatchesDiv.appendChild(noMatchesHeader);
-            noMatchesDiv.appendChild(noMatchesIcon);
+            // noMatchesDiv.appendChild(noMatchesIcon);
             searchResultsContainer.appendChild(noMatchesDiv);
         }
     }, "json");
