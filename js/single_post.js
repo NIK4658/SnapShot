@@ -6,23 +6,22 @@ let url = new URL(window.location.href);
 getSinglePost(url.searchParams.get("postId"));
 
 function getSinglePost(postid) {
-    $.post("./post_requests_handler.php", { getPost: true, postid: postid }, function (post) {
+    $.post("./post_requests_handler.php", { getPost: true, postid: postid }, function (result) {
         let postDiv;
-        console.log(post[0].post_id);
-        console.log(post[0].owner);
+        let post = result.post;
+        let currentUsername = result.currentUsername;
         const MainPageDiv = document.getElementById("post-page");
         if (post != 0) {
-            postDiv = getPostContainer(post[0].post_id, post[0].username, post[0].caption, post[0].liked, post[0].rated);
+            postDiv = getPostContainer(post[0].post_id, post[0].username, post[0].caption, result.isLiked, post[0].rated);
             MainPageDiv.appendChild(postDiv);
             retrieveImages(post[0].post_id);
             retrieveLikesNumber(post[0].post_id);
-            //DA FIXARE
-            retrieveComments(post[0].post_id, post[0].currentUsername);
+            retrieveComments(post[0].post_id, currentUsername);
             setInterval(function () {
                 retrieveLikesNumber(post[0].post_id);
             }, 1000);
             setInterval(function () {
-                retrieveComments(post[0].post_id, post[0].currentUsername);
+                retrieveComments(post[0].post_id, currentUsername);
             }, 1000);
             showCommentsDiv(post[0].post_id);
         } else {
@@ -37,6 +36,7 @@ function getSinglePost(postid) {
             noPostsDiv.appendChild(noPostsHeader);
             noPostsDiv.appendChild(noPostsIcon);
             MainPageDiv.appendChild(noPostsDiv);
+            history.go(-1);
         }
     }, "json");
 }
