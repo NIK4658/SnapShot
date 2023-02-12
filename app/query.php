@@ -20,7 +20,7 @@ const QUERIES = [
     "delete_user" => "DELETE FROM user WHERE username = ?",
     "check_username" => "SELECT username FROM user WHERE username = ?",
     "get_password" => "SELECT `password` FROM user WHERE username = ?",
-    "get_feed_posts" => "SELECT p.post_id, p.caption, p.`timestamp`, p.username AS owner, pl.username, pr.username AS rated FROM post p LEFT JOIN post_like pl ON p.post_id = pl.post_id AND pl.username = ? LEFT JOIN post_rating pr ON p.post_id = pr.post_id AND pr.username = ? WHERE p.username IN (SELECT to_username FROM `following` WHERE from_username = ?) ORDER BY p.`timestamp` DESC LIMIT ?, ?",
+    "get_feed_posts" => "SELECT p.post_id, p.caption, p.`timestamp`, p.username AS owner, pl.username, pr.username AS rated, p.location, p.device FROM post p LEFT JOIN post_like pl ON p.post_id = pl.post_id AND pl.username = ? LEFT JOIN post_rating pr ON p.post_id = pr.post_id AND pr.username = ? WHERE p.username IN (SELECT to_username FROM `following` WHERE from_username = ?) ORDER BY p.`timestamp` DESC LIMIT ?, ?",
     "get_user" => "SELECT * FROM user WHERE username = ?",
     "get_user_followers" => "SELECT * FROM user WHERE username IN (SELECT from_username AS username FROM following WHERE to_username = ?)",
     "get_user_following" => "SELECT * FROM user WHERE username IN (SELECT to_username AS username FROM following WHERE from_username = ?)",
