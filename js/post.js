@@ -1,6 +1,10 @@
 let postsCurrentSlide = [];
 
-function getPostContainer(postId, owner, caption, liked, rated) {
+function getPostContainer(postId, owner, caption, liked, rated, location, device) {
+
+    // console.log(location);
+    // console.log(device);
+
     postsCurrentSlide[postId] = 0;
     let postDiv = document.createElement("div");
     postDiv.className = "post";
@@ -207,13 +211,43 @@ function getPostContainer(postId, owner, caption, liked, rated) {
     postCaptionDiv.appendChild(captionUsername);
     postCaptionDiv.appendChild(captionText);
 
+    let postCaptionDiv2 = null;
+    let postCaptionDiv3 = null;
+
+    if(location!="" || location!=null){
+        postCaptionDiv2 = document.createElement("div");
+        postCaptionDiv2.className = "post-caption";
+        postCaptionDiv2.id = "post-location" + postId;
+        let locationText = document.createElement("p");
+        locationText.className = "caption-username";
+        locationText.id = "post-location-text" + postId;
+        locationText.textContent = "Location: " + location;
+        postCaptionDiv2.appendChild(locationText);
+    }
+
+    if(device!="" || device!=null){
+        postCaptionDiv3 = document.createElement("div");
+        postCaptionDiv3.className = "post-caption";
+        postCaptionDiv3.id = "post-device" + postId;
+        let deviceText = document.createElement("p");
+        deviceText.className = "caption-username";
+        deviceText.id = "post-device-text" + postId;
+        deviceText.textContent = "Device: " + device;
+        postCaptionDiv3.appendChild(deviceText);
+    }
+
     postDiv.appendChild(postImagesDiv);
     postDiv.appendChild(postInputCommentDiv);
     postDiv.appendChild(postCommentsDiv);
-    // if (!rated) {
-    //     postDiv.appendChild(postRatingDiv);
-    // }
     postDiv.appendChild(postCaptionDiv);
+
+    if(location!=""){
+        postDiv.appendChild(postCaptionDiv2);
+    }
+
+    if(device!=""){
+        postDiv.appendChild(postCaptionDiv3);
+    }
 
     return postDiv;
 }
