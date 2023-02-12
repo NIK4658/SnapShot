@@ -5,7 +5,7 @@
   color: #040F0F;
   text-align: center;
   border-radius: 0.5rem;
-  border: 2px solid #093412;
+  border: 2px solid #5e8c8f;
   padding: 0.8rem;
   position: fixed;
   z-index: 1;
@@ -68,6 +68,7 @@
   justify-content: center;
   margin: 0 auto;
   margin-bottom: 4rem;
+  padding-bottom: 1rem;
   border: 1px solid rgb(214, 214, 214);
   border-radius: 0.7rem;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -145,22 +146,26 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 1rem;
   width: 100%;
 }
 .post .post-caption > * {
   padding: 0 0.5rem;
+  margin: 0.25rem 0;
 }
 .post .post-caption a {
   color: #5e8c8f;
   font-weight: bold;
   text-align: flex-start;
+  font-style: italic;
+  padding-top: 0.25rem;
 }
 .post .post-caption a:hover {
   color: #9fd4d8;
 }
 .post .post-caption p {
   color: #040F0F;
+  font-style: italic;
+  padding-top: 0.25rem;
 }
 .post .post-input-comment-div {
   width: 90%;
@@ -308,6 +313,7 @@
   background: none;
   display: flex;
   flex-direction: row;
+  font-weight: bold;
 }
 .navbar a:hover {
   background-color: #c2d2d3;
@@ -361,7 +367,7 @@ header {
   border-radius: 0.3rem;
   font-size: 1rem;
   padding: 0.5rem;
-  outline-color: #0F571F;
+  outline-color: #5e8c8f;
 }
 .search-container .search-bar::-webkit-search-cancel-button {
   -webkit-appearance: none;
@@ -522,6 +528,7 @@ main > .delete-all-notifications-button span {
   font-size: medium;
   font-weight: bold;
   cursor: pointer;
+  background-color: rgb(118, 200, 255);
 }
 .signup-page .container > form .signup-button:hover {
   background-color: rgba(159, 212, 216, 0.7);
@@ -545,6 +552,11 @@ main > .delete-all-notifications-button span {
 }
 .login-page .containerForm > form #username {
   margin-bottom: 0.5rem;
+  width: 15rem;
+}
+.login-page .containerForm > form #password {
+  margin-bottom: 0.5rem;
+  width: 12.5rem;
 }
 .login-page .containerForm > form .input-field {
   display: flex;
@@ -559,11 +571,12 @@ main > .delete-all-notifications-button span {
   padding: 0.3rem;
   border: 3px solid #040F0F;
   border-radius: 0.5rem;
-  width: 6rem !important;
+  width: 10rem !important;
   height: 2.2rem;
   font-size: medium;
   font-weight: bold;
   cursor: pointer;
+  background-color: rgb(118, 200, 255);
 }
 .login-page .containerForm > form .login-button:hover {
   background-color: rgba(159, 212, 216, 0.7);
@@ -582,7 +595,7 @@ main > .delete-all-notifications-button span {
   text-align: right;
 }
 #edit-profile-form .save-button button {
-  color: #0F571F;
+  color: #5e8c8f;
   font-weight: bold;
 }
 #edit-profile-form .image-settings {
@@ -817,10 +830,10 @@ main > .delete-all-notifications-button span {
   height: auto;
   box-shadow: rgb(146, 148, 151) 5px 8px 35px;
   cursor: pointer;
-  border-radius: 0.75rem;
+  border-radius: 0.8rem;
 }
 .profile-posts.grid .grid-post .post-image-container {
-  border-radius: 0.75rem;
+  border-radius: 0.8rem;
 }
 .profile-posts.grid .grid-post .post-image-container img {
   border-radius: 0.6rem;
@@ -892,7 +905,7 @@ textarea {
   border: 2px solid #040F0F;
   border-radius: 0.5rem;
   padding: 0.3rem;
-  outline-color: #0F571F;
+  outline-color: #5e8c8f;
 }
 
 .current-page {
@@ -901,7 +914,7 @@ textarea {
 
 .option a {
   font-weight: bold;
-  color: #0F571F;
+  color: #5e8c8f;
 }
 .option a:hover {
   color: #9fd4d8;
