@@ -102,11 +102,8 @@ function showUsers(users, container){
         let noMatchesDiv = document.createElement("div");
         noMatchesDiv.className = "no-matches-found";
         let noMatchesHeader = document.createElement("h2");
-        noMatchesHeader.textContent = "No matches found";
-        let noMatchesIcon = document.createElement("span");
-        noMatchesIcon.className = "fa-regular fa-face-frown-slight";
+        noMatchesHeader.textContent = "No results found";
         noMatchesDiv.appendChild(noMatchesHeader);
-        noMatchesDiv.appendChild(noMatchesIcon);
         container.appendChild(noMatchesDiv);
     }
 
