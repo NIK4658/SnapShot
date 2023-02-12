@@ -16,7 +16,7 @@ export function getFeedPosts(offset, limit) {
             postsNumber += result.posts.length;
         }
         result.posts.forEach(post => {
-            postDiv = getPostContainer(post.post_id, post.owner, post.caption, post.liked, post.rated);
+            postDiv = getPostContainer(post.post_id, post.owner, post.caption, post.liked, post.rated, post.location, post.device);
             homePageDiv.appendChild(postDiv);
             retrieveImages(post.post_id);
             retrieveLikesNumber(post.post_id);
