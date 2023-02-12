@@ -170,11 +170,8 @@ function showNoNotificationsFound(notificationsNumber) {
         let noNotificationsFoundDiv = document.createElement("div");
         noNotificationsFoundDiv.className = "no-matches-found";
         let noNotificationsFoundHeader = document.createElement("h2");
-        noNotificationsFoundHeader.textContent = "No notifications";
-        let noNotificationsFoundIcon = document.createElement("span");
-        noNotificationsFoundIcon.className = "fa-regular fa-face-frown-slight";
+        noNotificationsFoundHeader.textContent = "You have no notifications";
         noNotificationsFoundDiv.appendChild(noNotificationsFoundHeader);
-        noNotificationsFoundDiv.appendChild(noNotificationsFoundIcon);
         mainTag.appendChild(noNotificationsFoundDiv);
     }
 }
