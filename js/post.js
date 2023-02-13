@@ -218,22 +218,28 @@ function getPostContainer(postId, owner, caption, liked, rated, location, device
         postCaptionDiv2 = document.createElement("div");
         postCaptionDiv2.className = "post-caption";
         postCaptionDiv2.id = "post-location" + postId;
-        let locationText = document.createElement("p");
-        locationText.className = "caption-username";
-        locationText.id = "post-location-text" + postId;
-        locationText.textContent = "Location: " + location;
-        postCaptionDiv2.appendChild(locationText);
+
+        let captionLocation = document.createElement("a");
+        captionLocation.className = "profile-link caption-username";
+        captionLocation.id = "caption-location" + postId;
+        captionLocation.title = "location user link";
+        captionLocation.href = "location_device.php?type=location&name=" + location;
+        captionLocation.textContent = "Location: " + location;
+        postCaptionDiv2.appendChild(captionLocation);
     }
 
     if(device!="" || device!=null){
         postCaptionDiv3 = document.createElement("div");
         postCaptionDiv3.className = "post-caption";
         postCaptionDiv3.id = "post-device" + postId;
-        let deviceText = document.createElement("p");
-        deviceText.className = "caption-username";
-        deviceText.id = "post-device-text" + postId;
-        deviceText.textContent = "Device: " + device;
-        postCaptionDiv3.appendChild(deviceText);
+
+        let captionDevice = document.createElement("a");
+        captionDevice.className = "profile-link caption-username";
+        captionDevice.id = "caption-device" + postId;
+        captionDevice.title = "device user link";
+        captionDevice.href = "location_device.php?type=device&name=" + device;
+        captionDevice.textContent = "Device: " + device;
+        postCaptionDiv3.appendChild(captionDevice);
     }
 
     postDiv.appendChild(postImagesDiv);
