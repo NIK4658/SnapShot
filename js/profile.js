@@ -1,16 +1,11 @@
-import { retrieveImages } from "./utils.js";
 
 const followUnfollowButton = document.getElementById("follow-unfollow-button");
 const profileImage = document.getElementById("profile-image").querySelector("img");
-const showPostsGridButton = document.getElementById("grid-button");
-const showPostsListButton = document.getElementById("list-button");
 const profilePosts = document.getElementById("profile-posts");
 
 let limit = 12;
 let offset = 0;
-let listActive = false;
 let gridActive = true;
-let intervalIds = [];
 let firstLoad = false;
 
 let url = new URL(window.location.href);
