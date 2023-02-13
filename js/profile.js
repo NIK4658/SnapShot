@@ -73,6 +73,7 @@ function showProfile() {
       followUnfollowButton.remove();
       let editProfileDiv = document.getElementById("edit-profile");
       let editProfileLink = document.createElement("a");
+      editProfileLink.title = "Edit profile";
       editProfileLink.className = "icon-button";
       editProfileLink.href = "./profile_settings.php";
       let editProfileIcon = document.createElement("span");
