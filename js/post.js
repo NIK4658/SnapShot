@@ -242,9 +242,6 @@ function getPostContainer(postId, owner, caption, liked, rated, location, device
         postCaptionDiv3.appendChild(captionDevice);
     }
 
-    postDiv.appendChild(postImagesDiv);
-    postDiv.appendChild(postInputCommentDiv);
-    postDiv.appendChild(postCommentsDiv);
     postDiv.appendChild(postCaptionDiv);
 
     if(location!=""){
@@ -254,6 +251,10 @@ function getPostContainer(postId, owner, caption, liked, rated, location, device
     if(device!=""){
         postDiv.appendChild(postCaptionDiv3);
     }
+
+    postDiv.appendChild(postImagesDiv);
+    postDiv.appendChild(postInputCommentDiv);
+    postDiv.appendChild(postCommentsDiv);
 
     return postDiv;
 }
