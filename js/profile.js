@@ -18,47 +18,6 @@ let username = url.searchParams.get("username");
 let currentUsername = null;
 showProfile();
 
-/*
-showPostsGridButton.onclick = function () {
-  if (!gridActive) {
-    firstLoad = false;
-    gridActive = true;
-    listActive = false;
-    showPostsListButton.querySelector("span").classList.remove("fa-solid");
-    showPostsListButton.querySelector("span").classList.add("fa-regular");
-    showPostsGridButton.querySelector("span").classList.remove("fa-regular");
-    showPostsGridButton.querySelector("span").classList.add("fa-solid");
-    profilePosts.classList.remove("list");
-    profilePosts.classList.add("grid");
-    intervalIds.forEach(id => clearInterval(id));
-    intervalIds = [];
-    profilePosts.innerHTML = "";
-    offset = 0;
-    limit = 20;
-    showPostsGrid(offset, limit);
-  }
-};
-*/
-
-/*
-showPostsListButton.onclick = function () {
-  if (!listActive) {
-    firstLoad = false;
-    listActive = true;
-    gridActive = false;
-    showPostsGridButton.querySelector("span").classList.remove("fa-solid");
-    showPostsGridButton.querySelector("span").classList.add("fa-regular");
-    showPostsListButton.querySelector("span").classList.remove("fa-regular");
-    showPostsListButton.querySelector("span").classList.add("fa-solid");
-    profilePosts.classList.remove("grid");
-    profilePosts.classList.add("list");
-    profilePosts.innerHTML = "";
-    offset = 0;
-    limit = 10;
-    showPostsList(offset, limit);
-  }
-};
-*/
 
 function showProfile() {
   $.post("./post_requests_handler.php", { getProfileData: true, username: username }, function (result) {
@@ -123,10 +82,6 @@ function showProfile() {
     let colorsValue = document.getElementById("colors");
     let compositionValue = document.getElementById("composition");
 
-    // showPostFrequencyText(result.profileData.postFrequency);
-    // exposureValue.textContent = Math.round(result.profileData.averageRating.average_exposure_rating * 10) / 10;
-    // colorsValue.textContent = Math.round(result.profileData.averageRating.average_colors_rating * 10) / 10;
-    // compositionValue.textContent = Math.round(result.profileData.averageRating.average_composition_rating * 10) / 10;;
   }, "json");
 }
 
@@ -152,42 +107,6 @@ function unfollow() {
   followUnfollowButton.onclick = follow;
   location.reload();
 }
-
-/*
-function showPostsList(offset, limit) {
-  $.post("./post_requests_handler.php", { getProfilePosts: true, username: username, offset: offset, limit: limit }, function (posts) {
-    posts.forEach(post => {
-      if (!listActive) {
-        return;
-      }
-
-      let postContainer = document.getElementById("post" + post.post_id);
-      if (postContainer === null) {
-        profilePosts.appendChild(getPostContainer(post.post_id, post.owner, post.caption, post.liked, currentUsername === post.owner || post.rated));
-        retrieveImages(post.post_id);
-
-        intervalIds.push(setInterval(function () {
-          $.post("./post_requests_handler.php", { getPostLikesNumber: true, postId: post.post_id }, function (likesNumber) {
-            let likesNumberTag = document.getElementById("likes-number" + post.post_id);
-            if (likesNumberTag !== null) {
-              likesNumberTag.textContent = likesNumber;
-            }
-          }, "json");
-        }, 1000));
-
-        intervalIds.push(setInterval(function () {
-          let postCommentsDiv = document.getElementById("post-comments" + post.post_id);
-          if (!postCommentsDiv.hidden) {
-            $.post("./post_requests_handler.php", { getPostComments: true, postId: post.post_id }, function (comments) {
-              getCommentsContainer(post.post_id, postCommentsDiv, comments, currentUsername);
-            }, "json");
-          }
-        }, 1000));
-      }
-    });
-    firstLoad = true;
-  }, "json");
-*/
 
 function showPostsGrid(offset, limit) {
   $.post("./post_requests_handler.php", { getProfilePosts: true, username: username, offset: offset, limit: limit }, function (posts) {
@@ -221,17 +140,6 @@ function getGridViewPostContainer(postId, owner) {
     window.location.href = "./post.php?postId=" + postId;
   };
 
-  // let fullScreenButton = document.createElement("button");
-  // fullScreenButton.className = "icon-button full-screen-button";
-  // fullScreenButton.id = "full-screen-button" + postId;
-  // fullScreenButton.type = "button";
-  // let fullScreenButtonIcon = document.createElement("span");
-  // fullScreenButtonIcon.className = "fa-regular fa-expand";
-  // fullScreenButton.appendChild(fullScreenButtonIcon);
-  // fullScreenButton.onclick = function () {
-  //   fullScreenImageGrid(postId);
-  // };
-
   if (owner === currentUsername) {
     let deleteButton = document.createElement("button");
     deleteButton.className = "icon-button delete-button";
@@ -247,27 +155,10 @@ function getGridViewPostContainer(postId, owner) {
   }
 
   imageDiv.appendChild(postImage);
-  // imageDiv.appendChild(fullScreenButton);
   postContainer.appendChild(imageDiv);
 
   return postContainer;
 }
-
-// function fullScreenImageGrid(postId) {
-//   let image = document.getElementById("post-image-container" + postId);
-//   if (image.requestFullscreen) {
-//     image.requestFullscreen();
-//   } else if (image.mozRequestFullScreen) {
-//     /* Firefox */
-//     image.mozRequestFullScreen();
-//   } else if (image.webkitRequestFullscreen) {
-//     /* Chrome, Safari and Opera */
-//     image.webkitRequestFullscreen();
-//   } else if (image.msRequestFullscreen) {
-//     /* IE/Edge */
-//     image.msRequestFullscreen();
-//   }
-// }
 
 function deletePost(postId) {
   $.post("./post_requests_handler.php", { deletePost: true, postId: postId }, function () {

@@ -8,7 +8,6 @@ const deviceTextArea = document.getElementById("device");
 const cRemainingCharactersSpan = document.getElementById("remaining-characters");
 const pRemainingCharactersSpan = document.getElementById("place-remaining-characters");
 const dRemainingCharactersSpan = document.getElementById("device-remaining-characters");
-//const remainingCharactersSpan = document.getElementById("remaining-characters");
 const createPostButton = document.getElementById("create-post-button");
 
 let images = [];

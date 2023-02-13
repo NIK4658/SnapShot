@@ -235,7 +235,6 @@ class DBConnection
             while ($row = $result->fetch_assoc()) {
                 $post = $row;
                 $post['liked'] = isset($row['username']);
-                //$post['rated'] = isset($row['rated']);
                 unset($post['username']);
 
                 array_push($posts, $post);
@@ -255,7 +254,6 @@ class DBConnection
             while ($row = $result->fetch_assoc()) {
                 $post = $row;
                 $post['liked'] = isset($row['username']);
-                //$post['rated'] = isset($row['rated']);
                 unset($post['username']);
 
                 array_push($posts, $post);
@@ -275,7 +273,6 @@ class DBConnection
             while ($row = $result->fetch_assoc()) {
                 $post = $row;
                 $post['liked'] = isset($row['username']);
-                //$post['rated'] = isset($row['rated']);
                 unset($post['username']);
 
                 array_push($posts, $post);
@@ -369,7 +366,6 @@ class DBConnection
         $stmt->bind_param("i", $postId);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    
         return $result;
     }
 

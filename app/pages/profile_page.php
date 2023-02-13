@@ -21,8 +21,4 @@
         </div>
     </div>
 </div>
-<!-- <div id="display-mode-buttons" class="display-mode-buttons">
-    <button id="grid-button" class="icon-button"><span class="fa-solid fa-grid"></span></button>
-    <button id="list-button" class="icon-button"><span class="fa-regular fa-bars"></span></button>
-</div> -->
 <div id='profile-posts' class="profile-posts grid"></div>

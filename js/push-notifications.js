@@ -1,7 +1,6 @@
 let loading = false;
 
 getNotSeenNotificationsNumber();
-
 setInterval(getNotSeenNotificationsNumber, 1000);
 
 function getNotSeenNotificationsNumber() {

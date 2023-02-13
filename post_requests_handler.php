@@ -58,12 +58,6 @@ if (isset($_POST['getMatchingUsers'])) {
     echo json_encode(array('users' => $users, 'locations' => $locations, 'devices' => $devices));
 }
 
-/*
-if (isset($_POST['getMatchingLocations'])) {
-    $locations = $dbconnection->getMatchingLocations($_POST['username']);
-    echo json_encode($locations);
-}*/
-
 if (isset($_POST['getPost'])) {
     $post = $dbconnection->getPost($_POST['postid']);
     $isLiked = $dbconnection->isLiked($_POST['postid'], $_SESSION['username']);
@@ -99,11 +93,6 @@ if (isset($_POST['likeComment'])) {
 if (isset($_POST['unlikeComment'])) {
     $dbconnection->unlikeComment($_POST['commentId']);
 }
-
-
-// if (isset($_POST['ratePost'])) {
-//     $dbconnection->ratePost($_POST['postId'], $_POST['owner'], $_POST['exposure'], $_POST['colors'], $_POST['composition']);
-// }
 
 if (isset($_POST['getFeedPosts'])) {
     $posts = $dbconnection->getFeedPosts($_POST['offset'], $_POST['limit']);
@@ -160,8 +149,6 @@ if (isset($_POST['getProfileData'])) {
     $profileData['numberPosts'] = $dbconnection->getUserPostsNumber($username);
     $profileData['numberFollowers'] = $dbconnection->getUserFollowersNumber($username);
     $profileData['numberFollowings'] = $dbconnection->getUserFollowingNumber($username);
-    // $profileData['postFrequency'] = $dbconnection->getUserPostFrequency($username);
-    // $profileData['averageRating'] = $dbconnection->getUserAverageRating($username);
     $profileData['isFollowing'] = $_SESSION['username'] != $username ? $dbconnection->isFollowing($_POST['username']) : false;
     echo json_encode(array("profileData" => $profileData, "currentUsername" => $_SESSION['username']));
 }

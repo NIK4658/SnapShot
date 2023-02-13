@@ -1,34 +1,14 @@
 let postsCurrentSlide = [];
 
 function getPostContainer(postId, owner, caption, liked, rated, location, device) {
-
-    // console.log(location);
-    // console.log(device);
-
     postsCurrentSlide[postId] = 0;
     let postDiv = document.createElement("div");
     postDiv.className = "post";
     postDiv.id = "post" + postId;
 
     let postImagesDiv = document.createElement("div");
-    // postImagesDiv.onclick = function () {
-    //     window.location.href = "post.php?post=" + postId;
-    // };
     postImagesDiv.className = "post-image-container";
     postImagesDiv.id = "post-image-container" + postId;
-
-    /*
-    let fullScreenButton = document.createElement("button");
-    fullScreenButton.className = "icon-button post-button full-screen-button";
-    fullScreenButton.id = "full-screen-button" + postId;
-    fullScreenButton.type = "button";
-    let fullScreenButtonIcon = document.createElement("span");
-    fullScreenButtonIcon.className = "fa-regular fa-expand";
-    fullScreenButton.appendChild(fullScreenButtonIcon);
-    fullScreenButton.onclick = function () {
-        fullScreenImage(postId);
-    };
-    */
 
     let buttonsDiv = document.createElement("div");
     buttonsDiv.className = "post-buttons-div";
@@ -67,31 +47,10 @@ function getPostContainer(postId, owner, caption, liked, rated, location, device
     commentButton.onclick = function () {
         showCommentsDiv(postId);
     };
-    /*
-    let ratingButton;
-    if (!rated) {
-        ratingButton = document.createElement("button");
-        ratingButton.className = "icon-button post-button rating-button";
-        ratingButton.id = "rating-button" + postId;
-        ratingButton.type = "button";
-        let ratingButtonIcon = document.createElement("span");
-        ratingButtonIcon.className = "fa-regular fa-square-star";
-        ratingButton.appendChild(ratingButtonIcon);
-        ratingButton.onclick = function () {
-            showRatingDiv(postId)
-        };
-    }
-    */
 
-    // postImagesDiv.appendChild(fullScreenButton);
     buttonsDiv.appendChild(likeButton);
     buttonsDiv.appendChild(likesNumber);
     buttonsDiv.appendChild(commentButton);
-    // if (!rated) {
-    //     buttonsDiv.appendChild(ratingButton);
-    // } else {
-    //     buttonsDiv.classList.add("no-rating-button");
-    // }
     postImagesDiv.appendChild(buttonsDiv);
 
     let postInputCommentDiv = document.createElement("div");
@@ -122,78 +81,8 @@ function getPostContainer(postId, owner, caption, liked, rated, location, device
     let postCommentsDiv = document.createElement("div");
     postCommentsDiv.className = "post-comments";
     postCommentsDiv.id = "post-comments" + postId;
-
-
     postInputCommentDiv.hidden = true;
     postCommentsDiv.hidden = true;
-
-    /*
-    let postRatingDiv;
-    if (!rated) {
-        postRatingDiv = document.createElement("div");
-        postRatingDiv.className = "post-rating";
-        postRatingDiv.id = "post-rating" + postId;
-        let exposureRatingDiv = document.createElement("div");
-        exposureRatingDiv.className = "rating-div";
-        let exposureLabel = document.createElement("label");
-        exposureLabel.className = "rating-label";
-        exposureLabel.htmlFor = "exposure-rating" + postId;
-        exposureLabel.textContent = "Exposure";
-        let exposureRating = document.createElement("input");
-        exposureRating.className = "rating-input";
-        exposureRating.id = "exposure-rating" + postId;
-        exposureRating.type = "range";
-        exposureRating.min = 0;
-        exposureRating.max = 5;
-        exposureRating.value = 5;
-        exposureRatingDiv.appendChild(exposureLabel);
-        exposureRatingDiv.appendChild(exposureRating);
-        let colorRatingDiv = document.createElement("div");
-        colorRatingDiv.className = "rating-div";
-        let colorLabel = document.createElement("label");
-        colorLabel.className = "rating-label";
-        colorLabel.htmlFor = "colors-rating" + postId;
-        colorLabel.textContent = "Color";
-        let colorRating = document.createElement("input");
-        colorRating.className = "rating-input";
-        colorRating.id = "colors-rating" + postId;
-        colorRating.type = "range";
-        colorRating.min = 0;
-        colorRating.max = 5;
-        colorRating.value = 5;
-        colorRatingDiv.appendChild(colorLabel);
-        colorRatingDiv.appendChild(colorRating);
-        let compositionRatingDiv = document.createElement("div");
-        compositionRatingDiv.className = "rating-div";
-        let compositionLabel = document.createElement("label");
-        compositionLabel.className = "rating-label";
-        compositionLabel.htmlFor = "composition-rating" + postId;
-        compositionLabel.textContent = "Composition";
-        let compositionRating = document.createElement("input");
-        compositionRating.className = "rating-input";
-        compositionRating.id = "composition-rating" + postId;
-        compositionRating.type = "range";
-        compositionRating.min = 0;
-        compositionRating.max = 5;
-        compositionRating.value = 5;
-        compositionRatingDiv.appendChild(compositionLabel);
-        compositionRatingDiv.appendChild(compositionRating);
-        let submitRatingButton = document.createElement("button");
-        submitRatingButton.className = "text-button post-button submit-rating-button";
-        submitRatingButton.id = "submit-rating-button" + postId;
-        submitRatingButton.type = "button";
-        submitRatingButton.textContent = "Rate";
-        submitRatingButton.onclick = function () {
-            ratePost(postId, owner, parseInt(document.getElementById("exposure-rating" + postId).value), parseInt(document.getElementById("colors-rating" + postId).value), parseInt(document.getElementById("composition-rating" + postId).value));
-        };
-        postRatingDiv.appendChild(exposureRatingDiv);
-        postRatingDiv.appendChild(colorRatingDiv);
-        postRatingDiv.appendChild(compositionRatingDiv);
-        postRatingDiv.appendChild(submitRatingButton);
-        postRatingDiv.hidden = true;
-        postRatingDiv.style.display = "none";
-    }
-    */
 
     let postCaptionDiv = document.createElement("div");
     postCaptionDiv.className = "post-caption";
@@ -258,39 +147,6 @@ function getPostContainer(postId, owner, caption, liked, rated, location, device
 
     return postDiv;
 }
-
-//DA FIXARE
-// function getSinglePost(postid) {
-//     $.post("./post_requests_handler.php", { getPost: true, postid: postid }, function (result) {
-//         const MainPageDiv = document.getElementById("post-page");
-//         postDiv = getPostContainer(post.post_id, post.owner, post.caption, post.liked, post.rated);
-//         MainPageDiv.appendChild(postDiv);
-//             retrieveImages(post.post_id);
-//             retrieveLikesNumber(post.post_id);
-//             retrieveComments(post.post_id, result.currentUsername);
-//             setInterval(function () {
-//                 retrieveLikesNumber(post.post_id);
-//             }, 1000);
-//             setInterval(function () {
-//                 retrieveComments(post.post_id, result.currentUsername);
-//             }, 1000);
-
-//         if (postsNumber === 0) {
-//             MainPageDiv.innerHTML = "";
-//             let noPostsDiv = document.createElement("div");
-//             noPostsDiv.className = "no-matches-found";
-//             let noPostsHeader = document.createElement("h2");
-//             noPostsHeader.textContent = "Nothing to see here... Follow someone first!";
-//             noPostsHeader.style.textAlign = "center";
-//             let noPostsIcon = document.createElement("span");
-//             noPostsIcon.className = "fa-regular fa-face-frown-slight";
-//             noPostsDiv.appendChild(noPostsHeader);
-//             noPostsDiv.appendChild(noPostsIcon);
-//             MainPageDiv.appendChild(noPostsDiv);
-//         }
-//     }, "json");
-// }
-
 
 function getCommentsContainer(postId, postCommentsDiv, comments, currentUsername) {
     postCommentsDiv.innerHTML = "";
