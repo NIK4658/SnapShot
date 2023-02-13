@@ -112,6 +112,7 @@ function getNotificationContainer(notification) {
 
 function getUserProfileImage(username, notificationId) {
     let notificationProfileImage = document.getElementById("notification-" + notificationId).querySelector("img");
+    notificationProfileImage.alt = username + "'s profile image";
     if (username in userProfileImages) {
         notificationProfileImage.src = "data:image/jpeg;base64," + userProfileImages[username];
     } else {
