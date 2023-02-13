@@ -18,7 +18,11 @@ showProfile();
 
 function showProfile() {
     showPostsGrid(offset, limit);
-    profileImage.src = "resources/images/blank_profile_picture.jpeg";
+    if(type == 'location'){
+      profileImage.src = "resources/images/location.png";
+    }else if(type == 'device'){
+      profileImage.src = "resources/images/device.png";
+    }
     let usernameParagrah = document.getElementById("username");
     usernameParagrah.textContent = username;
 }
