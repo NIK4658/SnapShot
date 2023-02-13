@@ -11,8 +11,6 @@ function getSinglePost(postid) {
         let post = result.post;
         let currentUsername = result.currentUsername;
         const MainPageDiv = document.getElementById("post-page");
-        console.log(post[0].location);
-        console.log(post[0].device);
         if (post != 0) {
             postDiv = getPostContainer(post[0].post_id, post[0].username, post[0].caption, result.isLiked, post[0].rated, post[0].location, post[0].device);
             MainPageDiv.appendChild(postDiv);
