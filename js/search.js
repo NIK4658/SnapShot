@@ -69,7 +69,7 @@ function getMatchingUsers(username) {
                 const userImage = document.createElement("img");
                 userImage.classList.add("user-image");
                 userImage.alt = device.name + " profile picture";
-                userImage.src = "resources/images/device.jpeg";
+                userImage.src = "resources/images/device.png";
     
                 const userLink = document.createElement("a");
                 userLink.className = "profile-link";
