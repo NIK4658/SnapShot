@@ -177,6 +177,34 @@ class DBConnection
         return $users;
     }
 
+    public function getMatchingLocations($username)
+    {
+        if ($username == '') {
+            return array();
+        }
+        $username .= '%';
+        $stmt = $this->conn->prepare(QUERIES['get_matching_locations']);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $locations = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        return $locations;
+    }
+
+    public function getMatchingDevices($username)
+    {
+        if ($username == '') {
+            return array();
+        }
+        $username .= '%';
+        $stmt = $this->conn->prepare(QUERIES['get_matching_devices']);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $devices = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        return $devices;
+    }
+
     public function getFeedPosts($offset, $limit)
     {
         $stmt = $this->conn->prepare(QUERIES['get_feed_posts']);
@@ -199,6 +227,46 @@ class DBConnection
     public function getProfilePosts($username, $offset, $limit)
     {
         $stmt = $this->conn->prepare(QUERIES['get_user_posts']);
+        $stmt->bind_param('sssii', $_SESSION['username'], $_SESSION['username'], $username, $offset, $limit);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $posts = array();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $post = $row;
+                $post['liked'] = isset($row['username']);
+                //$post['rated'] = isset($row['rated']);
+                unset($post['username']);
+
+                array_push($posts, $post);
+            }
+        }
+        return $posts;
+    }
+
+    public function getLocationPosts($username, $offset, $limit)
+    {
+        $stmt = $this->conn->prepare(QUERIES['get_location_posts']);
+        $stmt->bind_param('sssii', $_SESSION['username'], $_SESSION['username'], $username, $offset, $limit);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $posts = array();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $post = $row;
+                $post['liked'] = isset($row['username']);
+                //$post['rated'] = isset($row['rated']);
+                unset($post['username']);
+
+                array_push($posts, $post);
+            }
+        }
+        return $posts;
+    }
+
+    public function getDevicePosts($username, $offset, $limit)
+    {
+        $stmt = $this->conn->prepare(QUERIES['get_device_posts']);
         $stmt->bind_param('sssii', $_SESSION['username'], $_SESSION['username'], $username, $offset, $limit);
         $stmt->execute();
         $result = $stmt->get_result();

@@ -53,8 +53,16 @@ if (isset($_POST['deletePost'])) {
 
 if (isset($_POST['getMatchingUsers'])) {
     $users = $dbconnection->getMatchingUsers($_POST['username']);
-    echo json_encode($users);
+    $locations = $dbconnection->getMatchingLocations($_POST['username']);
+    $devices = $dbconnection->getMatchingDevices($_POST['username']);
+    echo json_encode(array('users' => $users, 'locations' => $locations, 'devices' => $devices));
 }
+
+/*
+if (isset($_POST['getMatchingLocations'])) {
+    $locations = $dbconnection->getMatchingLocations($_POST['username']);
+    echo json_encode($locations);
+}*/
 
 if (isset($_POST['getPost'])) {
     $post = $dbconnection->getPost($_POST['postid']);
@@ -168,6 +176,15 @@ if (isset($_POST['unfollow'])) {
 
 if (isset($_POST['getProfilePosts'])) {
     $posts = $dbconnection->getProfilePosts($_POST['username'], $_POST['offset'], $_POST['limit']);
+    echo json_encode($posts);
+}
+
+if (isset($_POST['getLocationOrDevicePosts'])) {
+    if($_POST['type'] == 'location'){
+        $posts = $dbconnection->getLocationPosts($_POST['username'], $_POST['offset'], $_POST['limit']);
+    } else if($_POST['type'] == 'device'){
+        $posts = $dbconnection->getDevicePosts($_POST['username'], $_POST['offset'], $_POST['limit']);
+    }
     echo json_encode($posts);
 }
 
