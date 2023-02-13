@@ -222,7 +222,7 @@ function getPostContainer(postId, owner, caption, liked, rated, location, device
         let captionLocation = document.createElement("a");
         captionLocation.className = "profile-link caption-username";
         captionLocation.id = "caption-location" + postId;
-        captionLocation.title = "location user link";
+        captionLocation.title = "location link";
         captionLocation.href = "location_device.php?type=location&name=" + location;
         captionLocation.textContent = "Location: " + location;
         postCaptionDiv2.appendChild(captionLocation);
@@ -236,7 +236,7 @@ function getPostContainer(postId, owner, caption, liked, rated, location, device
         let captionDevice = document.createElement("a");
         captionDevice.className = "profile-link caption-username";
         captionDevice.id = "caption-device" + postId;
-        captionDevice.title = "device user link";
+        captionDevice.title = "device link";
         captionDevice.href = "location_device.php?type=device&name=" + device;
         captionDevice.textContent = "Device: " + device;
         postCaptionDiv3.appendChild(captionDevice);
