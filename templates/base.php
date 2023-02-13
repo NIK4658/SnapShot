@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SnapShot | <?php echo $templateParams["title"]; ?></title>
+    <title>SnapShot</title>
     <link rel="icon" type="image/x-icon" href="resources/icons/favicon.ico">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.1/css/all.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
 
 <body>
     <header>
-        <h1><a href="./index.php">&nbsp;SNAPSHOT </a>-&nbsp;<?php echo $templateParams["title"]; ?></h1>
+        <h1><a href="./index.php">&nbsp;SNAPSHOT</a></h1>
     </header>
     <main>
         <?php
